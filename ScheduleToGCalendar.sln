@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduleToGCalendar", "ScheduleToGCalendar\ScheduleToGCalendar.csproj", "{FC7A9BB9-604B-411D-9C61-CCCA65D6BD5C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC7A9BB9-604B-411D-9C61-CCCA65D6BD5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC7A9BB9-604B-411D-9C61-CCCA65D6BD5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC7A9BB9-604B-411D-9C61-CCCA65D6BD5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC7A9BB9-604B-411D-9C61-CCCA65D6BD5C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D0BEA254-6A9F-4149-81EF-977E3EEEAD62}
+	EndGlobalSection
+EndGlobal

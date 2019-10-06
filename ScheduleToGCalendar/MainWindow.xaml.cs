@@ -15,14 +15,25 @@ using System.Windows.Shapes;
 
 namespace ScheduleToGCalendar
 {
+
+    
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         public MainWindow()
         {
             InitializeComponent();
         }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Scrapper scrapper = new Scrapper();
+            TextBox.Text = await Task.Run(() => scrapper.ReadHtml());
+        }
+
+       
     }
 }

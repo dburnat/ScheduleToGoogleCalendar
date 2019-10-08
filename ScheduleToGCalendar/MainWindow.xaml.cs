@@ -22,17 +22,27 @@ namespace ScheduleToGCalendar
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+        readonly Scrapper _scrapper = new Scrapper();
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private async void ReadHTML_Click(object sender, RoutedEventArgs e)
         {
-            Scrapper scrapper = new Scrapper();
-            TextBox.Text = await Task.Run(() => scrapper.ReadHtml());
+            
+            HtmlTextBox.Text = await Task.Run(() => _scrapper.ReadHtml());
+            await Task.Delay(100);
+            ConvertButton.IsEnabled = true;
         }
+
+        private async void Convert_Click(object sender, RoutedEventArgs e)
+        {
+            ConvertTextBox.Text = await Task.Run(() => _scrapper.Convert(_scrapper.RowElements));
+        }
+
+
+
 
        
     }

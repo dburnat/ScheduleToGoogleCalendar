@@ -38,7 +38,7 @@ namespace ScheduleToGCalendar
 
         private async void Convert_Click(object sender, RoutedEventArgs e)
         {
-            ConvertTextBox.Text = await Task.Run(() => _scrapper.Convert(_scrapper.RowElements));
+            ConvertTextBox.Text = await Task.Run(() => _scrapper.ConvertHtmlToClass(_scrapper.TableElements));
         }
 
 

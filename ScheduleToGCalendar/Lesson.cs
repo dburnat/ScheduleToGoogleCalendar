@@ -14,10 +14,11 @@ namespace ScheduleToGCalendar
         public string LessonName { get; set; }
         public string Group { get; set; }
         public string ClassRoom { get; set; }
+        public string Date { get; set; }
 
         public override string ToString()
         {
-            return ($"Start: {StartTime} \nEnd: {EndTime} \nTeacher: {TeacherName} \nLesson: {LessonName} \nGroup: {Group} \nClass Room: {ClassRoom} \n");
+            return ($"Date: {Date} \nStart: {StartTime} \nEnd: {EndTime} \nTeacher: {TeacherName} \nLesson: {LessonName} \nGroup: {Group} \nClass Room: {ClassRoom} \n");
         }
     }
 }

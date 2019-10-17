@@ -341,3 +341,4 @@ healthchecksdb
 
 html/
 /credentials.json
+/ScheduleToGCalendar/credentials.json

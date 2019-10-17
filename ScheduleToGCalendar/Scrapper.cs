@@ -49,22 +49,59 @@ namespace ScheduleToGCalendar
 
 
            sb.Clear();
-           for (var i = 0; i < lines.Length; i += 10)
+           
+           int dateIncrease = 0;
+           string currentDate = lines[0];
+           for (var i = 0; i < lines.Length - 10; i += 10)
            {
-               Lesson lesson = new Lesson
+               try
                {
-                   StartTime = lines[i % 10],
-                   EndTime = lines[i + 1 % 10],
-                   TeacherName = lines[i + 3 % 10],
-                   LessonName = lines[i + 4 %10],
-                   Group = lines[i + 6 % 10],
-                   ClassRoom = lines[i + 7 % 10]
-               };
-               lessons.Add(lesson);
-               sb.AppendLine(lesson.ToString());
+                   if (lines[i + dateIncrease] == "Brak" && lines[ i + 1 + dateIncrease].Contains("2019"))
+                   {
+                       if (i + dateIncrease > lines.Length)
+                           break;
+                       currentDate = lines[i + 1 +dateIncrease];
+                       dateIncrease++;
+                       Lesson lesson = new Lesson
+                       {
+                           Date = currentDate,
+                           StartTime = lines[i +1 + dateIncrease % 10],
+                           EndTime = lines[i + 2 + dateIncrease % 10],
+                           TeacherName = lines[i + 4 + dateIncrease % 10],
+                           LessonName = lines[i + 5  +dateIncrease %10],
+                           Group = lines[i + 7 + dateIncrease % 10],
+                           ClassRoom = lines[i + 8 + dateIncrease % 10]
+                       };
+                       lessons.Add(lesson);
+                       sb.AppendLine(lesson.ToString());
+                   
+                   }
+                   else
+                   {
+                       if (i + dateIncrease > lines.Length)
+                           break;
+                       Lesson lesson = new Lesson
+                       {
+                           Date = currentDate,
+                           StartTime = lines[i +1 + dateIncrease % 10],
+                           EndTime = lines[i + 2 + dateIncrease % 10],
+                           TeacherName = lines[i + 4 + dateIncrease % 10],
+                           LessonName = lines[i + 5  +dateIncrease %10],
+                           Group = lines[i + 7 + dateIncrease % 10],
+                           ClassRoom = lines[i + 8 + dateIncrease % 10]
+                       };
+                       lessons.Add(lesson);
+                       sb.AppendLine(lesson.ToString());
+                   
+                   }
+               }
+               catch (Exception e)
+               {
+                   MessageBox.Show(e.Message);
+                   throw;
+               }
            }
-
-           return sb.ToString() + lessons.Count;
+           return sb.ToString();
        }
    }
 }

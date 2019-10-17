@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -46,7 +46,7 @@ namespace ScheduleToGCalendar
            sb.Clear();
            
            int dateIncrease = 0;
-           string currentDate = lines[0];
+           string currentDate = lines[0].Substring(12,10 );
            for (var i = 0; i < lines.Length - 10; i += 10)
            {
                try
@@ -55,7 +55,7 @@ namespace ScheduleToGCalendar
                    {
                        if (i + dateIncrease > lines.Length)
                            break;
-                       currentDate = lines[i + 1 +dateIncrease];
+                       currentDate = lines[i + 1 +dateIncrease].Substring(12,10 );
                        dateIncrease++;
                        Lesson lesson = new Lesson
                        {

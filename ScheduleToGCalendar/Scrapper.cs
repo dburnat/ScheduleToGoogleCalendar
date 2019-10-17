@@ -16,6 +16,7 @@ namespace ScheduleToGCalendar
    public class Scrapper
    {
        public IEnumerable<IElement> TableElements;
+       public List<Lesson> Lessons = new List<Lesson>();
 
        /// <summary>
        /// Reads HTML file containing schedule and extracts from it data in the rows.
@@ -71,7 +72,7 @@ namespace ScheduleToGCalendar
                            Group = lines[i + 7 + dateIncrease % 10],
                            ClassRoom = lines[i + 8 + dateIncrease % 10]
                        };
-                       lessons.Add(lesson);
+                       Lessons.Add(lesson);
                        sb.AppendLine(lesson.ToString());
                    
                    }
@@ -89,7 +90,7 @@ namespace ScheduleToGCalendar
                            Group = lines[i + 7 + dateIncrease % 10],
                            ClassRoom = lines[i + 8 + dateIncrease % 10]
                        };
-                       lessons.Add(lesson);
+                       Lessons.Add(lesson);
                        sb.AppendLine(lesson.ToString());
                    
                    }

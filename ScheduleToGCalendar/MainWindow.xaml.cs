@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +23,8 @@ namespace ScheduleToGCalendar
     public partial class MainWindow : Window
     {
         readonly Scrapper _scrapper = new Scrapper();
+        readonly GoogleApi _googleApi = new GoogleApi();
+
         public MainWindow()
         {
             InitializeComponent();

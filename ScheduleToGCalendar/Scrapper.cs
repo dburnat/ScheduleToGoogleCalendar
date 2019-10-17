@@ -17,6 +17,10 @@ namespace ScheduleToGCalendar
    {
        public IEnumerable<IElement> TableElements;
 
+       /// <summary>
+       /// Reads HTML file containing schedule and extracts from it data in the rows.
+       /// </summary>
+       /// <param name="path">Path to html file containing schedule</param>
        public async Task<string> ReadHtml(string path = "")
         {
             var source = File.ReadAllText(@"..\..\html\plan.html");

@@ -44,8 +44,19 @@ namespace ScheduleToGCalendar
         }
 
 
+        private void GetToken_Click(object sender, RoutedEventArgs e)
+        {
+            _googleApi.CreateGoogleToken();
+        }
 
+        private void GetService_Click(object sender, RoutedEventArgs e)
+        {
+            _googleApi.CreateGoogleCalendarService();
+        }
 
-       
+        private void AddEvent_Click(object sender, RoutedEventArgs e)
+        {
+            _googleApi.AddEventToCalendar(_scrapper.Lessons);
+        }
     }
 }

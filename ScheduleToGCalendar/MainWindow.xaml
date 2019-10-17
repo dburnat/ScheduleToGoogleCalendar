@@ -11,6 +11,10 @@
         <Button Content="Read HTML"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="66,372,0,0" Click="ReadHTML_Click"/>
         <TextBox x:Name="ConvertTextBox" HorizontalAlignment="Left" Height="354" TextWrapping="Wrap"  VerticalAlignment="Top" Width="370"  Margin="395,10,0,0"/>
         <Button Content="Convert" x:Name="ConvertButton"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="548,372,0,0" Click="Convert_Click" IsEnabled="False"/>
+        <Button Content="Token" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" Margin="248,377,0,0" Click="GetToken_Click"/>
+        <Button Content="Service" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" Margin="344,377,0,0" Click="GetService_Click"/>
+        <Button Content="Add Event" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Margin="436,377,0,0" Click="AddEvent_Click" />
+
 
     </Grid>
 </Window>

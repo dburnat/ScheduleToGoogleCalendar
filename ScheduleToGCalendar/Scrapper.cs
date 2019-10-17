@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,7 +22,6 @@ namespace ScheduleToGCalendar
             var source = File.ReadAllText(@"..\..\html\plan.html");
             var config = Configuration.Default;
             var context = BrowsingContext.New(config);
-
             var document = await context.OpenAsync(req => req.Content(source));
             TableElements = document.QuerySelectorAll(
                 "tr.dxgvDataRow_Aqua > td.dxgv, tr.dxgvGroupRow_Aqua > td.dxgv");
@@ -32,22 +31,18 @@ namespace ScheduleToGCalendar
             {
                 sb.AppendLine(Regex.Replace(tableElement.TextContent, @"<[^>]+>|&nbsp;", "").Trim());
             }
-            
             return sb.ToString();
         }
 
        public async  Task<string> ConvertHtmlToClass(IEnumerable<IElement> rows)
        {
            List<Lesson> lessons = new List<Lesson>();
-
            StringBuilder sb = new StringBuilder();
            foreach (var element in rows)
            {
                sb.AppendLine(Regex.Replace(element.TextContent.Replace(" ", " "), @"<[^>]+>|&nbsp;", "").Trim());
            }
            string[] lines = sb.ToString().Trim(' ').Split(Environment.NewLine.ToCharArray() , StringSplitOptions.RemoveEmptyEntries);
-
-
            sb.Clear();
            
            int dateIncrease = 0;

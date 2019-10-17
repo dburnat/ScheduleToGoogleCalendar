@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,8 +15,7 @@ namespace ScheduleToGCalendar
 {
    public class Scrapper
    {
-       public IEnumerable<AngleSharp.Dom.IElement> RowElements;
-       private IEnumerable<AngleSharp.Dom.IElement> GroupElements;
+       public IEnumerable<IElement> TableElements;
 
        public async Task<string> ReadHtml(string path = "")
         {
@@ -25,17 +24,13 @@ namespace ScheduleToGCalendar
             var context = BrowsingContext.New(config);
 
             var document = await context.OpenAsync(req => req.Content(source));
-            //RowElements = document.All.Where(m => m.ClassList.Contains("dxgvDataRow_Aqua"));
-            //RowElements = document.QuerySelectorAll("tr.dxgvDataRow_Aqua");
-            RowElements = document.QuerySelectorAll("tr.dxgvDataRow_Aqua > td.dxgv");
-            GroupElements = document.QuerySelectorAll("tr.dxgvGroupRow_Aqua > td.dxgv");
-
-
+            TableElements = document.QuerySelectorAll(
+                "tr.dxgvDataRow_Aqua > td.dxgv, tr.dxgvGroupRow_Aqua > td.dxgv");
+            
             StringBuilder sb = new StringBuilder();
-           
-            foreach (var rowElement in RowElements)
+            foreach (var tableElement in TableElements)
             {
-                sb.AppendLine(Regex.Replace(rowElement.TextContent, @"<[^>]+>|&nbsp;", "").Trim());
+                sb.AppendLine(Regex.Replace(tableElement.TextContent, @"<[^>]+>|&nbsp;", "").Trim());
             }
             
             return sb.ToString();

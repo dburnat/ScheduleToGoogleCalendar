@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +15,6 @@ using System.Windows.Shapes;
 
 namespace ScheduleToGCalendar
 {
-
     
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -32,7 +31,6 @@ namespace ScheduleToGCalendar
 
         private async void ReadHTML_Click(object sender, RoutedEventArgs e)
         {
-            
             HtmlTextBox.Text = await Task.Run(() => _scrapper.ReadHtml());
             await Task.Delay(100);
             ConvertButton.IsEnabled = true;

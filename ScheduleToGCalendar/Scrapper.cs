@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -38,10 +38,8 @@ namespace ScheduleToGCalendar
             }
             return sb.ToString();
         }
-
        public async  Task<string> ConvertHtmlToClass(IEnumerable<IElement> rows)
        {
-           List<Lesson> lessons = new List<Lesson>();
            StringBuilder sb = new StringBuilder();
            foreach (var element in rows)
            {

@@ -57,7 +57,7 @@ namespace ScheduleToGCalendar
             }
         }
 
-        public void AddEventToCalendar(List<Lesson> lessons)
+        public void AddEventToCalendar(List<Lesson> lessons, int reminderMinutes = 15)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace ScheduleToGCalendar
                         var endLessonTime = DateTime.Parse(lesson.Date + " " +  lesson.EndTime);
                         EventDateTime start = new EventDateTime{DateTime = startLessonTime};
                         EventDateTime end = new EventDateTime{DateTime = endLessonTime};
-                        var reminder1 = new EventReminder {Method = "popup", Minutes = 15};
+                        var reminder1 = new EventReminder {Method = "popup", Minutes = reminderMinutes};
                     
                         var eventReminderData = new Event.RemindersData {UseDefault = false, Overrides = new[] {reminder1}};
 

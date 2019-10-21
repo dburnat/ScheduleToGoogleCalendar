@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,7 +14,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
 
 namespace ScheduleToGCalendar
@@ -28,6 +28,7 @@ namespace ScheduleToGCalendar
         readonly GoogleApi _googleApi = new GoogleApi();
         private string _htmlLocalization;
         private string _credentialsLocalization;
+        private static readonly Regex _regex = new Regex("\\d+");
 
         public MainWindow()
         {
@@ -78,7 +79,7 @@ namespace ScheduleToGCalendar
 
         private void AddEvent_Click(object sender, RoutedEventArgs e)
         {
-            _googleApi.AddEventToCalendar(_scrapper.Lessons);
+            _googleApi.AddEventToCalendar(_scrapper.Lessons, int.Parse(ReminderTextBox.Text));
             StatusTextBox.Text += $"{DateTime.Now:T} Added {_scrapper.Lessons.Count} lessons to your schedule. Enjoy\n";
             StatusTextBox.ScrollToEnd();
         }
@@ -139,6 +140,16 @@ namespace ScheduleToGCalendar
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
             e.Handled = true;
 
+        }
+
+        private void ReminderTextBox_OnPreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsTextAllowed(e.Text);
+        }
+
+        private static bool IsTextAllowed(string text)
+        {
+            return !_regex.IsMatch(text);
         }
     }
 }

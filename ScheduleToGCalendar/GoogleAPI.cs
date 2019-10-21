@@ -18,11 +18,11 @@ namespace ScheduleToGCalendar
         private UserCredential _userCredential;
         private CalendarService _service;
 
-        public void CreateGoogleToken()
+        public void CreateGoogleToken(string credentialsPath)
         {
             try
             {
-                using (var stream = new FileStream(@"..\..\credentials.json", FileMode.Open, FileAccess.Read ))
+                using (var stream = new FileStream(credentialsPath, FileMode.Open, FileAccess.Read ))
                 {
                     string credPath = "token.json";
                     _userCredential = GoogleWebAuthorizationBroker.AuthorizeAsync(
@@ -31,7 +31,6 @@ namespace ScheduleToGCalendar
                         "user",
                         CancellationToken.None,
                         new FileDataStore(credPath, true)).Result;
-                    MessageBox.Show("Credentials saved to " + credPath);
                 }
             }
             catch (Exception e)
@@ -50,7 +49,6 @@ namespace ScheduleToGCalendar
                     HttpClientInitializer = _userCredential,
                     ApplicationName = ApplicationName
                 });
-                MessageBox.Show("Created calendar service ");
             }
             catch (Exception e)
             {
@@ -63,31 +61,32 @@ namespace ScheduleToGCalendar
         {
             try
             {
-                int lessonCount = 0;
-                foreach(var lesson in lessons)
+
+                if (lessons != null && lessons.Count > 0)
                 {
-                    var ev = new Event();
-                    var startLessonTime = DateTime.Parse(lesson.Date + " " + lesson.StartTime);
-                    var endLessonTime = DateTime.Parse(lesson.Date + " " +  lesson.EndTime);
-                    EventDateTime start = new EventDateTime{DateTime = startLessonTime};
-                    EventDateTime end = new EventDateTime{DateTime = endLessonTime};
-                    var reminder1 = new EventReminder {Method = "popup", Minutes = 15};
+                    foreach(var lesson in lessons)
+                    {
+                        var ev = new Event();
+                        var startLessonTime = DateTime.Parse(lesson.Date + " " + lesson.StartTime);
+                        var endLessonTime = DateTime.Parse(lesson.Date + " " +  lesson.EndTime);
+                        EventDateTime start = new EventDateTime{DateTime = startLessonTime};
+                        EventDateTime end = new EventDateTime{DateTime = endLessonTime};
+                        var reminder1 = new EventReminder {Method = "popup", Minutes = 15};
                     
-                    var eventReminderData = new Event.RemindersData {UseDefault = false, Overrides = new[] {reminder1}};
+                        var eventReminderData = new Event.RemindersData {UseDefault = false, Overrides = new[] {reminder1}};
 
-                    ev.Start = start;
-                    ev.End = end;
-                    ev.Summary = lesson.LessonName + " " + lesson.ClassRoom;
-                    ev.Description = lesson.TeacherName + " " + lesson.Group;
-                    ev.Reminders = eventReminderData;
+                        ev.Start = start;
+                        ev.End = end;
+                        ev.Summary = lesson.LessonName + " " + lesson.ClassRoom;
+                        ev.Description = lesson.TeacherName + " " + lesson.Group;
+                        ev.Reminders = eventReminderData;
                     
 
 
-                    var calendarId = "primary";
-                    Event recurringEvent = _service.Events.Insert(ev, calendarId).Execute();
-                    lessonCount++;
+                        var calendarId = "primary";
+                        Event recurringEvent = _service.Events.Insert(ev, calendarId).Execute();
+                    }
                 }
-                MessageBox.Show($"Added {lessonCount} lessons");
             }
             catch (Exception e)
             {

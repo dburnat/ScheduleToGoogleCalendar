@@ -44,11 +44,13 @@
         </Viewbox>
         <TextBox x:Name="CredentialsLocalizationTextBox" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Margin="5">Google credentials file localization</TextBox>
         <TextBox x:Name="HtmlTextBox" Grid.Column="3" Grid.Row="0" Grid.RowSpan="8"  TextWrapping="Wrap"  VerticalAlignment="Top"   Margin="10,10,0,0" VerticalScrollBarVisibility="Auto"/>
-        <Button Content="Read HTML" Grid.Column="0"  Grid.Row="6"  Margin="10"  Click="ReadHTML_Click"/>
+        <Button x:Name="ReadHtmlButton" Content="Read HTML" Grid.Column="0"  Grid.Row="6"  Margin="10"  Click="ReadHTML_Click" IsEnabled="False"/>
+        <Label x:Name="ErrorLabel" Grid.Row ="5" Grid.ColumnSpan="2" Foreground="Red"></Label>
         <Button Content="Convert" Grid.Column="0" Grid.Row="7" x:Name="ConvertButton"  Margin="10"  Click="Convert_Click" IsEnabled="False"/>
-        <Button Content="Token" Grid.Column="1"  Grid.Row="6"  Margin="10" Click="GetToken_Click"/>
-        <Button Content="Service" Grid.Column="1" Grid.Row="7"  Margin="10" Click="GetService_Click"/>
-        <Button Content="Add Events" Grid.Column="1" Grid.Row="8"  Margin="10" Click="AddEvent_Click" />
+        <Button  x:Name="GoogleServicesButton"  Content="Google Service" Grid.Column="1"  Grid.Row="6"  Margin="10" Click="GoogleServices_Click" IsEnabled="False"/>
+        <Button x:Name="AddEventsButton" Content="Add Events" Grid.Column="1" Grid.Row="7"  Margin="10" Click="AddEvent_Click" IsEnabled="False" />
+        <TextBox x:Name="StatusTextBox" Grid.Row="9" Grid.ColumnSpan="4" Margin="5" VerticalScrollBarVisibility="Visible"></TextBox>
+        
         
 
     </Grid>

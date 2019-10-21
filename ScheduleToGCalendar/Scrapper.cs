@@ -17,8 +17,6 @@ namespace ScheduleToGCalendar
    {
        public IEnumerable<IElement> TableElements;
        public readonly List<Lesson> Lessons = new List<Lesson>();
-       public string HtmlLocalization { get; set; }
-       public string CredentialsLocalization { get; set; }
 
        /// <summary>
        /// Reads HTML file containing schedule and extracts from it data in the rows.
@@ -26,7 +24,7 @@ namespace ScheduleToGCalendar
        /// <param name="path">Path to html file containing schedule</param>
        public async Task<string> ReadHtml(string path = "")
         {
-            var source = File.ReadAllText(@"..\..\html\plan.html");
+            var source = File.ReadAllText(path);
             var config = Configuration.Default;
             var context = BrowsingContext.New(config);
             var document = await context.OpenAsync(req => req.Content(source));
@@ -42,9 +40,6 @@ namespace ScheduleToGCalendar
         }
        public async Task<string> ConvertHtmlToClass(IEnumerable<IElement> rows)
        {
-
-           
-
            StringBuilder sb = new StringBuilder();
            foreach (var element in rows)
            {

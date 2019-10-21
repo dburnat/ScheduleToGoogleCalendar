@@ -13,8 +13,8 @@ namespace ScheduleToGCalendar
 {
     public class GoogleApi
     {
-        private static string[] Scopes = {CalendarService.Scope.Calendar};
-        private static string _applicationName = "WSEI Schedule import";
+        private static readonly string[] Scopes = {CalendarService.Scope.Calendar};
+        private const string ApplicationName = "WSEI Schedule import";
         private UserCredential _userCredential;
         private CalendarService _service;
 
@@ -48,7 +48,7 @@ namespace ScheduleToGCalendar
                 _service = new CalendarService(new BaseClientService.Initializer()
                 {
                     HttpClientInitializer = _userCredential,
-                    ApplicationName = _applicationName
+                    ApplicationName = ApplicationName
                 });
                 MessageBox.Show("Created calendar service ");
             }

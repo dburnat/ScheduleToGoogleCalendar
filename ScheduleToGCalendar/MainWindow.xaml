@@ -4,21 +4,52 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ScheduleToGCalendar"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="689.5" Width="817.5">
+        Title="WSEI schedule to Google Calendar" MinHeight="689.5" MinWidth="817.5" Height="689.5" Width="817.5">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="379*"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.3*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="HtmlTextBox" HorizontalAlignment="Left" Height="354" TextWrapping="Wrap"  VerticalAlignment="Top" Width="370"  Margin="10,241,0,0"/>
-        <Button Content="Read HTML"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="124" Margin="30,617,0,0" Click="ReadHTML_Click"/>
-        <TextBox  x:Name="ConvertTextBox" HorizontalAlignment="Left" Height="354" TextWrapping="Wrap"  VerticalAlignment="Top" Width="370"  Margin="428,241,0,0"/>
-        <Button Content="Convert" x:Name="ConvertButton"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="102" Margin="586,617,0,0" Click="Convert_Click" IsEnabled="False"/>
-        <Button Content="Token" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" Margin="172,617,0,0" Click="GetToken_Click"/>
-        <Button Content="Service" HorizontalAlignment="Left" VerticalAlignment="Top" Width="82" Margin="272,617,0,0" Click="GetService_Click"/>
-        <Button Content="Add Event" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="374,617,0,0" Click="AddEvent_Click" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" ></RowDefinition>
+            <RowDefinition Height="*" ></RowDefinition>
+            <RowDefinition Height="*" ></RowDefinition>
+            <RowDefinition Height="*" ></RowDefinition>
+            <RowDefinition Height="*"  ></RowDefinition>
+            <RowDefinition Height="*" ></RowDefinition>
+            <RowDefinition Height="*" ></RowDefinition>
+            <RowDefinition Height="*" ></RowDefinition>
+            <RowDefinition Height="*" ></RowDefinition>
+            <RowDefinition Height="*" ></RowDefinition>
+        </Grid.RowDefinitions>
 
+        <TextBox x:Name="HtmlLocalizationTextBox" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="5">HTML file localization</TextBox>
+        <Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.ColumnSpan="2"><Hyperlink NavigateUri="https://dziekanat.wsei.edu.pl/?powrot=%2FPlany%2FPlanyStudentow" RequestNavigate="Hyperlink_OnRequestNavigate">Get WSEI schedule from here and save it as HTML</Hyperlink></Label>
+        <Button Style="{DynamicResource MaterialDesignRaisedLightButton}" Grid.Row="1" Grid.Column="2" Margin="10,0"  Click="LoadHtml_Click" ></Button>
+        <Viewbox Width="36" Height="36"   Grid.Row="1" Grid.Column="2" >
+            <Canvas Width="24" Height="24" Margin="4">
+                <Path Data="M10 20H6V4H13V9H18V12.1L20 10.1V8L14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H10V20M20.2 13C20.3 13 20.5 13.1 20.6 13.2L21.9 14.5C22.1 14.7 22.1 15.1 21.9 15.3L20.9 16.3L18.8 14.2L19.8 13.2C19.9 13.1 20 13 20.2 13M20.2 16.9L14.1 23H12V20.9L18.1 14.8L20.2 16.9Z" Fill="Black" />
+            </Canvas>
+        </Viewbox>
+        <Label Grid.Row="2" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.ColumnSpan="2"><Hyperlink NavigateUri="https://developers.google.com/calendar/quickstart/dotnet" RequestNavigate="Hyperlink_OnRequestNavigate">Get Google credentials from here</Hyperlink></Label>
+        <Button Style="{DynamicResource MaterialDesignRaisedLightButton}" Grid.Row="3" Grid.Column="2" Margin="10,0" Click="LoadCredentials_Click"></Button>
+        <Viewbox Width="36" Height="36"   Grid.Row="3" Grid.Column="2"  >
+            <Canvas Width="24" Height="24" Margin="4">
+                <Path Data="M10 20H6V4H13V9H18V12.1L20 10.1V8L14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H10V20M20.2 13C20.3 13 20.5 13.1 20.6 13.2L21.9 14.5C22.1 14.7 22.1 15.1 21.9 15.3L20.9 16.3L18.8 14.2L19.8 13.2C19.9 13.1 20 13 20.2 13M20.2 16.9L14.1 23H12V20.9L18.1 14.8L20.2 16.9Z" Fill="Black" />
+            </Canvas>
+        </Viewbox>
+        <TextBox x:Name="CredentialsLocalizationTextBox" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Margin="5">Google credentials file localization</TextBox>
+        <TextBox x:Name="HtmlTextBox" Grid.Column="3" Grid.Row="0" Grid.RowSpan="8"  TextWrapping="Wrap"  VerticalAlignment="Top"   Margin="10,10,0,0" VerticalScrollBarVisibility="Auto"/>
+        <Button Content="Read HTML" Grid.Column="0"  Grid.Row="6"  Margin="10"  Click="ReadHTML_Click"/>
+        <Button Content="Convert" Grid.Column="0" Grid.Row="7" x:Name="ConvertButton"  Margin="10"  Click="Convert_Click" IsEnabled="False"/>
+        <Button Content="Token" Grid.Column="1"  Grid.Row="6"  Margin="10" Click="GetToken_Click"/>
+        <Button Content="Service" Grid.Column="1" Grid.Row="7"  Margin="10" Click="GetService_Click"/>
+        <Button Content="Add Events" Grid.Column="1" Grid.Row="8"  Margin="10" Click="AddEvent_Click" />
+        
 
     </Grid>
 </Window>

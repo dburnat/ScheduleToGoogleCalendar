@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace ScheduleToGCalendar
 {
@@ -39,7 +41,7 @@ namespace ScheduleToGCalendar
 
         private async void Convert_Click(object sender, RoutedEventArgs e)
         {
-            ConvertTextBox.Text = await Task.Run(() => _scrapper.ConvertHtmlToClass(_scrapper.TableElements));
+            HtmlTextBox.Text = await Task.Run(() => _scrapper.ConvertHtmlToClass(_scrapper.TableElements));
         }
 
 
@@ -58,5 +60,51 @@ namespace ScheduleToGCalendar
             _googleApi.AddEventToCalendar(_scrapper.Lessons);
         }
 
+        private void LoadHtml_Click(object sender, RoutedEventArgs e)
+        {
+
+            try
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+            
+                ofd.Filter = "Html (*.html)|*.html";
+                if (ofd.ShowDialog() == true)
+                {
+                    _scrapper.HtmlLocalization = ofd.FileName;
+                    HtmlLocalizationTextBox.Text = ofd.FileName;
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+                throw;
+            }
+        }
+        private void LoadCredentials_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Filter = "JSON (*.json)|*.json";
+                if (ofd.ShowDialog() == true)
+                {
+                    _scrapper.CredentialsLocalization = ofd.FileName;
+                    CredentialsLocalizationTextBox.Text = ofd.FileName;
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+                throw;
+            }
+        }
+
+
+        private void Hyperlink_OnRequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
+
+        }
     }
 }

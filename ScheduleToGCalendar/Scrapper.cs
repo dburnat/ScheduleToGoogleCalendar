@@ -16,7 +16,9 @@ namespace ScheduleToGCalendar
    public class Scrapper
    {
        public IEnumerable<IElement> TableElements;
-       public List<Lesson> Lessons = new List<Lesson>();
+       public readonly List<Lesson> Lessons = new List<Lesson>();
+       public string HtmlLocalization { get; set; }
+       public string CredentialsLocalization { get; set; }
 
        /// <summary>
        /// Reads HTML file containing schedule and extracts from it data in the rows.
@@ -38,8 +40,11 @@ namespace ScheduleToGCalendar
             }
             return sb.ToString();
         }
-       public async  Task<string> ConvertHtmlToClass(IEnumerable<IElement> rows)
+       public async Task<string> ConvertHtmlToClass(IEnumerable<IElement> rows)
        {
+
+           
+
            StringBuilder sb = new StringBuilder();
            foreach (var element in rows)
            {

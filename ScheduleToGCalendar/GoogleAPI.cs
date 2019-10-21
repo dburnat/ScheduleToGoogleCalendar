@@ -14,7 +14,7 @@ namespace ScheduleToGCalendar
     public class GoogleApi
     {
         private static string[] Scopes = {CalendarService.Scope.Calendar};
-        private static string _applicationName = "Wsei Schedule import";
+        private static string _applicationName = "WSEI Schedule import";
         private UserCredential _userCredential;
         private CalendarService _service;
 

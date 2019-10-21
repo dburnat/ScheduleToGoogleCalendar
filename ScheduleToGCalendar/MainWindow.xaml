@@ -5,15 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ScheduleToGCalendar"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="689.5" Width="817.5">
     <Grid>
-        <TextBox x:Name="HtmlTextBox" HorizontalAlignment="Left" Height="354" TextWrapping="Wrap"  VerticalAlignment="Top" Width="370"  Margin="0,10,0,0"/>
-        <Button Content="Read HTML"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="66,372,0,0" Click="ReadHTML_Click"/>
-        <TextBox x:Name="ConvertTextBox" HorizontalAlignment="Left" Height="354" TextWrapping="Wrap"  VerticalAlignment="Top" Width="370"  Margin="395,10,0,0"/>
-        <Button Content="Convert" x:Name="ConvertButton"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="548,372,0,0" Click="Convert_Click" IsEnabled="False"/>
-        <Button Content="Token" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" Margin="248,377,0,0" Click="GetToken_Click"/>
-        <Button Content="Service" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" Margin="344,377,0,0" Click="GetService_Click"/>
-        <Button Content="Add Event" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Margin="436,377,0,0" Click="AddEvent_Click" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="379*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="HtmlTextBox" HorizontalAlignment="Left" Height="354" TextWrapping="Wrap"  VerticalAlignment="Top" Width="370"  Margin="10,241,0,0"/>
+        <Button Content="Read HTML"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="124" Margin="30,617,0,0" Click="ReadHTML_Click"/>
+        <TextBox  x:Name="ConvertTextBox" HorizontalAlignment="Left" Height="354" TextWrapping="Wrap"  VerticalAlignment="Top" Width="370"  Margin="428,241,0,0"/>
+        <Button Content="Convert" x:Name="ConvertButton"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="102" Margin="586,617,0,0" Click="Convert_Click" IsEnabled="False"/>
+        <Button Content="Token" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" Margin="172,617,0,0" Click="GetToken_Click"/>
+        <Button Content="Service" HorizontalAlignment="Left" VerticalAlignment="Top" Width="82" Margin="272,617,0,0" Click="GetService_Click"/>
+        <Button Content="Add Event" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="374,617,0,0" Click="AddEvent_Click" />
 
 
     </Grid>

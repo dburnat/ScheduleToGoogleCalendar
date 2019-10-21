@@ -34,6 +34,7 @@ namespace ScheduleToGCalendar
             HtmlTextBox.Text = await Task.Run(() => _scrapper.ReadHtml());
             await Task.Delay(100);
             ConvertButton.IsEnabled = true;
+            
         }
 
         private async void Convert_Click(object sender, RoutedEventArgs e)
@@ -56,5 +57,6 @@ namespace ScheduleToGCalendar
         {
             _googleApi.AddEventToCalendar(_scrapper.Lessons);
         }
+
     }
 }

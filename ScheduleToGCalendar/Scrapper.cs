@@ -59,7 +59,7 @@ namespace ScheduleToGCalendar
            {
                try
                {
-                   if (lines[i + dateIncrease] == "Brak" && lines[ i + 1 + dateIncrease].Contains("2020"))
+                   if (lines[i + dateIncrease] == "Brak" && lines[ i + 1 + dateIncrease].Contains("2020") || lines[ i + 1 + dateIncrease].Contains("2019") )
                    {
                        if (i + dateIncrease > lines.Length)
                            break;
@@ -82,6 +82,73 @@ namespace ScheduleToGCalendar
                    else
                    {
                        if (i + dateIncrease > lines.Length)
+                           break;
+                       Lesson lesson = new Lesson
+                       {
+                           Date = currentDate,
+                           StartTime = lines[i +1 + dateIncrease % 10],
+                           EndTime = lines[i + 2 + dateIncrease % 10],
+                           TeacherName = lines[i + 4 + dateIncrease % 10],
+                           LessonName = lines[i + 5  +dateIncrease %10],
+                           Group = lines[i + 7 + dateIncrease % 10],
+                           ClassRoom = lines[i + 8 + dateIncrease % 10]
+                       };
+                       Lessons.Add(lesson);
+                       sb.AppendLine(lesson.ToString());
+                   
+                   }
+               }
+               catch (Exception e)
+               {
+                   MessageBox.Show(e.Message);
+                   throw;
+               }
+           }
+           return sb.ToString();
+       }
+       
+       public async Task<string> ConvertHtmlToClassListApproach(IEnumerable<IElement> rows)
+       {
+           Lessons?.Clear(); //clear lessons so there won't be duplicates while clicking Lessons button
+
+           StringBuilder sb = new StringBuilder();
+           List<string> lines = new List<string>();
+           foreach (var element in rows)
+           {
+               sb.AppendLine(Regex.Replace(element.TextContent.Replace(" ", " "), @"<[^>]+>|&nbsp;", "").Trim());
+           }
+           lines = sb.ToString().Trim(' ').Split(Environment.NewLine.ToCharArray() , StringSplitOptions.RemoveEmptyEntries).ToList();
+           sb.Clear();
+           
+           int dateIncrease = 0;
+           string currentDate = lines[0].Substring(12,10 );
+           for (var i = 0; i < lines.Count - 10; i += 10)
+           {
+               try
+               {
+                   if (lines[i + dateIncrease] == "Brak" && lines[ i + 1 + dateIncrease].Contains("2020") || lines[ i + 1 + dateIncrease].Contains("2019") )
+                   {
+                       if (i + dateIncrease > lines.Count)
+                           break;
+                       currentDate = lines[i + 1 +dateIncrease].Substring(12,10 );
+                       dateIncrease++;
+                       Lesson lesson = new Lesson
+                       {
+                           Date = currentDate,
+                           StartTime = lines[i +1 + dateIncrease % 10],
+                           EndTime = lines[i + 2 + dateIncrease % 10],
+                           TeacherName = lines[i + 4 + dateIncrease % 10],
+                           LessonName = lines[i + 5  +dateIncrease %10],
+                           Group = lines[i + 7 + dateIncrease % 10],
+                           ClassRoom = lines[i + 8 + dateIncrease % 10]
+                       };
+                       Lessons.Add(lesson);
+                       sb.AppendLine(lesson.ToString());
+                   
+                   }
+                   else
+                   {
+                       if (i + dateIncrease > lines.Count)
                            break;
                        Lesson lesson = new Lesson
                        {

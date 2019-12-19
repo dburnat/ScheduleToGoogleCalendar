@@ -43,6 +43,8 @@ namespace ScheduleToGCalendar
         }
        public async Task<string> ConvertHtmlToClass(IEnumerable<IElement> rows)
        {
+           Lessons?.Clear(); //clear lessons so there won't be duplicates while clicking Lessons button
+
            StringBuilder sb = new StringBuilder();
            foreach (var element in rows)
            {

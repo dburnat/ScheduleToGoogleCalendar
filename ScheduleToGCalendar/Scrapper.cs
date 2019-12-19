@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -32,10 +32,13 @@ namespace ScheduleToGCalendar
                 "tr.dxgvDataRow_Aqua > td.dxgv, tr.dxgvGroupRow_Aqua > td.dxgv");
             
             StringBuilder sb = new StringBuilder();
-            foreach (var tableElement in TableElements)
-            {
-                sb.AppendLine(Regex.Replace(tableElement.TextContent, @"<[^>]+>|&nbsp;", "").Trim());
-            }
+
+            if (TableElements != null)
+                foreach (var tableElement in TableElements)
+                {
+                    sb.AppendLine(Regex.Replace(tableElement.TextContent, @"<[^>]+>|&nbsp;", "").Trim());
+                }
+
             return sb.ToString();
         }
        public async Task<string> ConvertHtmlToClass(IEnumerable<IElement> rows)

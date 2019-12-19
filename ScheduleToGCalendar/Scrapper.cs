@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -54,7 +54,7 @@ namespace ScheduleToGCalendar
            {
                try
                {
-                   if (lines[i + dateIncrease] == "Brak" && lines[ i + 1 + dateIncrease].Contains("2019"))
+                   if (lines[i + dateIncrease] == "Brak" && lines[ i + 1 + dateIncrease].Contains("2020"))
                    {
                        if (i + dateIncrease > lines.Length)
                            break;
